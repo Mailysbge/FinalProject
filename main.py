@@ -1,39 +1,39 @@
-from tkinter import *
-import frames.Menu as Menu
-import frames.Jeux as Jeux
+import tkinter
+from views.Menu import Menu
+from views.MemoryBase import MemoryBase
+
+def removeAllFrames():
+    global CurrentFrame
+    if (CurrentFrame is not None):
+        CurrentFrame.destroy()
+        emptyMenu = tkinter.Menu(master)
+        master.config(menu=emptyMenu)
 
 
-def callbackMenu():
-    MenuFrame.pack_forget()
-    JeuxFrame.pack()
+def showMemory():
+    global CurrentFrame
+    removeAllFrames()
+    master.title("Memory")
+    CurrentFrame = MemoryBase().createFrame(master, showMenu)
 
 
-def callbackJeux():
-    JeuxFrame.pack_forget()
-    JeuxFrame2.pack()
+def showPingPong():
+    global CurrentFrame
+    removeAllFrames()
+    master.title("Ping-Pong")
+    CurrentFrame = MemoryBase().createFrame(master, showMenu)
+
+def showMenu():
+    global CurrentFrame
+    removeAllFrames()
+    master.title('Arena games')
+    CurrentFrame = Menu().createFrame(master, showMemory, showPingPong)
 
 
-def callbackJeux2():
-    JeuxFrame2.pack_forget()
-    MenuFrame.pack()
 
-def callbackJeux3():
-    JeuxFrame3.pack_forget()
-    MenuFrame.pack()
+master = tkinter.Tk()
 
-master = Tk()
-master.title('Arena games')
-master.geometry('600x300+200+400')
+CurrentFrame = None
 
-MenuFrame = Menu.createFrame(master, callbackMenu)
-
-JeuxFrame = Jeux.createFrame(master, callbackJeux)
-
-JeuxFrame2 = Jeux.createFrame(
-    master, callbackMenu, "Go back to the menu now !")
-
-JeuxFrame3 = Jeux.createFrame(
-    master, callbackMenu, "Retour")
-
-MenuFrame.pack()
-mainloop()
+showMenu()
+tkinter.mainloop()
