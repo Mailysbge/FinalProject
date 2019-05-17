@@ -3,6 +3,7 @@ from tkinter import *
 from views.Menu import Menu
 from views.MemoryBase import MemoryBase
 
+
 def removeAllFrames():
     global CurrentFrame
     if (CurrentFrame is not None):
@@ -10,11 +11,13 @@ def removeAllFrames():
         emptyMenu = tkinter.Menu(master)
         master.config(menu=emptyMenu)
 
+
 def showMemory():
     global CurrentFrame
     removeAllFrames()
     master.title("Memory")
     CurrentFrame = MemoryBase().createFrame(master, showMenu)
+
 
 def showPingPong():
     global CurrentFrame
@@ -22,11 +25,20 @@ def showPingPong():
     master.title("Ping-Pong")
     CurrentFrame = MemoryBase().createFrame(master, showMenu)
 
+
+def showMorpion():
+    global CurrentFrame
+    removeAllFrames()
+    master.title("Morpion")
+    CurrentFrame = MemoryBase().createFrame(master, showMenu)
+
+
 def showMenu():
     global CurrentFrame
     removeAllFrames()
     master.title('Arena games')
-    CurrentFrame = Menu().createFrame(master, showMemory, showPingPong)
+    CurrentFrame = Menu().createFrame(master, showMemory, showPingPong, showMorpion)
+
 
 # Programme principal
 master = tkinter.Tk()
