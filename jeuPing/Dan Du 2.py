@@ -1,11 +1,10 @@
-from tkinter import *
+﻿from tkinter import *
 import pygame
 import random
 import math
 from PIL import Image, ImageTk
-
-self.Largeur = 1024 # en pixels
-self.Hauteur = 700
+Largeur = 1024 # en pixels
+Hauteur = 700
 
 Mafenetre = Tk()
 lbScore1 = Label(Mafenetre, text="")
@@ -18,7 +17,7 @@ R1Y = 0
 R2X = 0
 R2Y = 0
 
-Rself.Hauteur = 160
+RHauteur = 160
 RLargeur = 5
 
 class Game:
@@ -30,10 +29,10 @@ Rayon = 7 # rayon de la balle
 
 # position initiale au milieu
 X = Largeur/2
-Y = self.Hauteur/2
+Y = Hauteur/2
 
 # direction initiale aléatoire
-vitesse = random.uniform(3, 2)*5
+vitesse = random.uniform(1.8, 2)*5
 angle = random.uniform(0, 2*math.pi)
 DX = vitesse*math.cos(angle)
 DY = vitesse*math.sin(angle)
@@ -42,14 +41,14 @@ DY = vitesse*math.sin(angle)
 def deplacement_balle():
 
     """ Déplacement de la balle """
-    global X,Y,DX,DY,Rayon,Largeur,self.Hauteur,RX1,RY1,RX2,RY2,Rself.Hauteur,RLargeur,score_1,score_2,lbScore1
+    global X,Y,DX,DY,Rayon,Largeur,Hauteur,RX1,RY1,RX2,RY2,RHauteur,RLargeur,score_1,score_2,lbScore1
 
     # rebond à droite
     if X+Rayon+DX > Largeur:
         score_1 += 1
         lbScore1['text'] = "Joueur 1 : " + format(str(score_1))
         X = Largeur / 2
-        Y = self.Hauteur / 2
+        Y = Hauteur / 2
         DX = vitesse*math.cos(angle)
         DY = vitesse*math.sin(angle)
 
@@ -58,13 +57,13 @@ def deplacement_balle():
         score_2 += 1
         lbScore2['text'] = "Joueur 2 : " + format(str(score_2))
         X = Largeur / 2
-        Y = self.Hauteur / 2
+        Y = Hauteur / 2
         DX = vitesse*math.cos(angle)
         DY = vitesse*math.sin(angle)
 
     # rebond en bas
-    if Y+Rayon+DY > self.Hauteur:
-        Y = 2*(self.Hauteur-Rayon)-Y
+    if Y+Rayon+DY > Hauteur:
+        Y = 2*(Hauteur-Rayon)-Y
         DY = -DY
 
     # rebond en haut
@@ -73,12 +72,12 @@ def deplacement_balle():
         DY = -DY
 
     # Rebond raquette 1
-    if (Y+DY > R1Y - Rself.Hauteur/2) and (Y+DY < R1Y + Rself.Hauteur/2):
+    if (Y+DY > R1Y - RHauteur/2) and (Y+DY < R1Y + RHauteur/2):
         if (X+DX > R1X):
             DX = -DX
 
     # Rebond raquette 2
-    if (Y+DY > R2Y - Rself.Hauteur/2) and (Y+DY < R2Y + Rself.Hauteur/2):
+    if (Y+DY > R2Y - RHauteur/2) and (Y+DY < R2Y + RHauteur/2):
         if (X+DX < R2X+RLargeur):
             DX = -DX
 
@@ -96,17 +95,17 @@ def haut1(event):
     global R1Y
     """mouvement vers le haut de la raquette 1"""
     R1Y = R1Y - 10
-    if (R1Y-Rself.Hauteur/2) < 0 :
+    if (R1Y-RHauteur/2) < 0 :
         R1Y = R1Y + 10
     else :
         MonCanevas.move(Raquette1, 0, -10)
 
 
 def bas1(event):
-    global R1Y, self.Hauteur
+    global R1Y, Hauteur
     """mouvement vers le bas de la raquette 1"""
     R1Y = R1Y + 10
-    if (R1Y+Rself.Hauteur/2) > self.Hauteur :
+    if (R1Y+RHauteur/2) > Hauteur :
         R1Y = R1Y - 10
     else :
         MonCanevas.move(Raquette1, 0, 10)
@@ -116,16 +115,16 @@ def haut2(event):
     global R2Y
     """mouvement vers le haut de la raquette 2"""
     R2Y = R2Y - 10
-    if (R2Y-Rself.Hauteur/2) < 0 :
+    if (R2Y-RHauteur/2) < 0 :
         R2Y = R2Y + 10
     else :
         MonCanevas.move(Raquette2, 0, -10)
 
 def bas2 (event):
-    global R2Y, self.Hauteur
+    global R2Y, Hauteur
     """mouvement vers le bas de la raquette 2"""
     R2Y = R2Y + 10
-    if (R2Y+Rself.Hauteur/2) > self.Hauteur :
+    if (R2Y+RHauteur/2) > Hauteur :
         R2Y = R2Y - 10
     else :
         MonCanevas.move(Raquette2, 0, 10)
@@ -135,7 +134,7 @@ Mafenetre.title('Dan Du')
 photo = PhotoImage(file="jeuPing/fond.gif")
 # création d'un widget 'Canvas'
 MonCanevas = Canvas(Mafenetre,
- width = Largeur, height = self.Hauteur)
+ width = Largeur, height = Hauteur)
 MonCanevas.pack(side = TOP, padx = 10, pady = 10)
 item = MonCanevas.create_image(0, 0,
  anchor=NW, image=photo)
@@ -147,13 +146,13 @@ Bouton1 = Button(Mafenetre, text = 'Quitter',
 Bouton1.pack()
 # Création d'un objet graphique raquette
 R1X = 1010
-R1Y = self.Hauteur/2
+R1Y = Hauteur/2
 R2X = 10
-R2Y = self.Hauteur/2
-Raquette1 = MonCanevas.create_rectangle(R1X, R1Y-Rself.Hauteur/2,
- R1X+RLargeur, R1Y+Rself.Hauteur/2, outline='white', fill='white')
-Raquette2 = MonCanevas.create_rectangle(R2X, R2Y-Rself.Hauteur/2,
- R2X+RLargeur, R2Y+Rself.Hauteur/2, outline='white', fill='white')
+R2Y = Hauteur/2
+Raquette1 = MonCanevas.create_rectangle(R1X, R1Y-RHauteur/2,
+ R1X+RLargeur, R1Y+RHauteur/2, outline='white', fill='white')
+Raquette2 = MonCanevas.create_rectangle(R2X, R2Y-RHauteur/2,
+ R2X+RLargeur, R2Y+RHauteur/2, outline='white', fill='white')
 #Association des movements aux touches du clavier
 MonCanevas.bind_all("z", haut2)
 MonCanevas.bind_all("s", bas2)
