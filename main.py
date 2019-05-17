@@ -2,7 +2,6 @@ import tkinter
 from tkinter import *
 from views.Menu import Menu
 from views.MemoryBase import MemoryBase
-from jeuPing.DanDu import DanDu
 
 def removeAllFrames():
     global CurrentFrame
@@ -21,13 +20,7 @@ def showPingPong():
     global CurrentFrame
     removeAllFrames()
     master.title("Ping-Pong")
-    CurrentFrame = DanDu().createFrame(master, showMenu)
-
-def showMorpion():
-        global CurrentFrame
-        removeAllFrames()
-        master.title("Morpion")
-        CurrentFrame = jeuMorpion().createFrame(master, showMenu)
+    CurrentFrame = MemoryBase().createFrame(master, showMenu)
 
 def showMenu():
     global CurrentFrame
