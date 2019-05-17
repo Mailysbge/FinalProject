@@ -2,6 +2,7 @@ import tkinter
 from tkinter import *
 from views.Menu import Menu
 from views.MemoryBase import MemoryBase
+from morpion.Morpion import Morpion
 
 
 def removeAllFrames():
@@ -30,7 +31,7 @@ def showMorpion():
     global CurrentFrame
     removeAllFrames()
     master.title("Morpion")
-    CurrentFrame = MemoryBase().createFrame(master, showMenu)
+    CurrentFrame = Morpion().createFrame(master, showMenu)
 
 
 def showMenu():
