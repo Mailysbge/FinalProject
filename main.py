@@ -1,8 +1,10 @@
 import tkinter
+import pygame
 from tkinter import *
 from views.Menu import Menu
 from views.MemoryBase import MemoryBase
 from morpion.Morpion import Morpion
+from pingPong.PingPong import PingPong
 
 
 def removeAllFrames():
@@ -11,6 +13,8 @@ def removeAllFrames():
         CurrentFrame.destroy()
         emptyMenu = tkinter.Menu(master)
         master.config(menu=emptyMenu)
+        if (pygame.mixer.get_init() is not None):
+            pygame.mixer.stop()
 
 
 def showMemory():
@@ -24,7 +28,7 @@ def showPingPong():
     global CurrentFrame
     removeAllFrames()
     master.title("Ping-Pong")
-    CurrentFrame = MemoryBase().createFrame(master, showMenu)
+    CurrentFrame = PingPong().createFrame(master, showMenu)
 
 
 def showMorpion():
