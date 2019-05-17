@@ -8,7 +8,7 @@ class MemoryBase:
     def __init__(self, ):
         """Constructeur de classe"""
 
-        #Listes de l'instance."""
+        """Listes de l'instance."""
         self.images = [] 
         #contient les liens aux fichiers images.
         self.cartes = []      
@@ -18,7 +18,7 @@ class MemoryBase:
         self.score = [0, 0]     
         #le score des joueurs.
 
-        #Variables d'instances avec leur paramètres nommés."""
+        """Variables d'instances avec leur paramètres nommés."""
         self.nb_lignes = 5    
         #définie le nombre de ligne.
         self.nb_colonnes = 4  
@@ -37,14 +37,13 @@ class MemoryBase:
         #score du joueur 1.
         self.points_joueur2 = None 
         self.callbackExit = None      
-        #Un callback, c'est une fonction passée en paramètre,qui
-        # va être appelée à une condition. La condition est “quand 
-        # ceci arrive”et “ceci” est “quand le traitement est terminé”.
-
+        """Un callback, c'est une fonction passée en paramètre,qui
+        va être appelée à une condition. La condition est “quand 
+        ceci arrive”et “ceci” est “quand le traitement est terminé”."""
 
     def images_chargement(self):
         del self.images[:]   
-        # ça supprime/vide tout le contenue de la liste
+        #ça supprime/vide tout le contenue de la liste
         nb_images = 21  
         # j'assigne une valeur à ma variable qui correspond au nombre de cartes
         choixCartes = []

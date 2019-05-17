@@ -14,7 +14,7 @@ class Menu:
         pingPongButton.pack(side = LEFT, padx = 100, pady = 150)
 
         # Création d'un widget Button (bouton Morpion) 
-        MorpionButton = Button(frame, text ='Morpion', command = callbackMorpionClick) 
+        MorpionButton = Button(frame, text ='Morpion', command = callbackPingPongClick) 
         MorpionButton.pack(side = LEFT, padx = 100, pady = 150)
 
         return frame

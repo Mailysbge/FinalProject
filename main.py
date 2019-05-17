@@ -23,6 +23,12 @@ def showPingPong():
     master.title("Ping-Pong")
     CurrentFrame = DanDu().createFrame(master, showMenu)
 
+def showMorpion():
+        global CurrentFrame
+        removeAllFrames()
+        master.title("Morpion")
+        CurrentFrame = jeuMorpion().createFrame(master, showMenu)
+
 def showMenu():
     global CurrentFrame
     removeAllFrames()

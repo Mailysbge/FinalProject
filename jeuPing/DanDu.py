@@ -47,58 +47,58 @@ class DanDu:
 
         # rebond à droite
         if self.X+self.Rayon+self.DX > self.Largeur:
-            score_1 += 1
-            lbScore1['text'] = "Joueur 1 : " + format(str(score_1))
-            X = Largeur / 2
-            Y = Hauteur / 2
-            DX = vitesse*math.cos(angle)
-            DY = vitesse*math.sin(angle)
+            self.score_1 += 1
+            self.lbScore1['text'] = "Joueur 1 : " + format(str(score_1))
+            self.X = Largeur / 2
+            self.Y = Hauteur / 2
+            self.DX = vitesse*math.cos(angle)
+            self.DY = vitesse*math.sin(angle)
 
         # rebond à gauche
-        if X-Rayon+DX < 0:
-            score_2 += 1
-            lbScore2['text'] = "Joueur 2 : " + format(str(score_2))
-            X = Largeur / 2
-            Y = Hauteur / 2
-            DX = vitesse*math.cos(angle)
-            DY = vitesse*math.sin(angle)
+        if self.X-self.Rayon+self.DX < 0:
+            self.score_2 += 1
+            self.lbScore2['text'] = "Joueur 2 : " + format(str(score_2))
+            self.X = Largeur / 2
+            self.Y = Hauteur / 2
+            self.DX = vitesse*math.cos(angle)
+            self.DY = vitesse*math.sin(angle)
 
         # rebond en bas
-        if Y+Rayon+DY > Hauteur:
-            Y = 2*(Hauteur-Rayon)-Y
-            DY = -DY
+        if self.Y+self.Rayon+self.DY > self.Hauteur:
+            self.Y = 2*(self.Hauteur-self.Rayon)-self.Y
+            self.DY = -self.DY
 
         # rebond en haut
-        if Y-Rayon+DY < 0:
-            Y = 2*Rayon-Y
-            DY = -DY
+        if self.Y-self.Rayon+self.DY < 0:
+            self.Y = 2*self.Rayon-self.Y
+            self.DY = -self.DY
 
         # Rebond raquette 1
-        if (Y+DY > R1Y - RHauteur/2) and (Y+DY < R1Y + RHauteur/2):
-            if (X+DX > R1X):
-                DX = -DX
+        if (self.Y+self.DY > self.R1Y - self.RHauteur/2) and (self.Y+self.DY < self.R1Y + self.RHauteur/2):
+            if (self.X+self.DX > self.R1X):
+                self.DX = -self.DX
 
         # Rebond raquette 2
-        if (Y+DY > R2Y - RHauteur/2) and (Y+DY < R2Y + RHauteur/2):
-            if (X+DX < R2X+RLargeur):
-                DX = -DX
+        if (self.Y+self.DY > self.R2Y - self.RHauteur/2) and (self.Y+DY < self.R2Y + self.RHauteur/2):
+            if (self.X+DX < self.R2X+self.RLargeur):
+                self.DX = -self.DX
 
-        X = X+DX
-        Y = Y+DY
+        self.X = self.X+self.DX
+        self.Y = self.Y+self.DY
 
         # affichage
-        MonCanevas.coords(Balle, X-Rayon,
-        Y-Rayon, X+Rayon, Y+Rayon)
+        MonCanevas.coords(Balle, self.X-self.Rayon,
+        self.Y-self.Rayon, self.X+self.Rayon, self.Y+self.Rayon)
 
         # mise à jour toutes les 50 ms
         Mafenetre.after(50, deplacement_balle)
 
     def haut1(event):
-        global R1Y
+        self.R1Y
         """mouvement vers le haut de la raquette 1"""
-        R1Y = R1Y - 10
-        if (R1Y-RHauteur/2) < 0 :
-            R1Y = R1Y + 10
+        self.R1Y = self.R1Y - 10
+        if (self.R1Y-self.RHauteur/2) < 0 :
+            self.R1Y = self.R1Y + 10
         else :
             MonCanevas.move(Raquette1, 0, -10)
 
@@ -106,28 +106,28 @@ class DanDu:
     def bas1(event):
         global R1Y, Hauteur
         """mouvement vers le bas de la raquette 1"""
-        R1Y = R1Y + 10
-        if (R1Y+RHauteur/2) > Hauteur :
-            R1Y = R1Y - 10
+        self.R1Y = self.R1Y + 10
+        if (self.R1Y+self.RHauteur/2) > self.Hauteur :
+            self.R1Y = self.R1Y - 10
         else :
             MonCanevas.move(Raquette1, 0, 10)
 
 
     def haut2 (event):
-        global R2Y
+        self.R2Y
         """mouvement vers le haut de la raquette 2"""
-        R2Y = R2Y - 10
-        if (R2Y-RHauteur/2) < 0 :
-            R2Y = R2Y + 10
+        self.R2Y = self.R2Y - 10
+        if (self.R2Y-self.RHauteur/2) < 0 :
+            self.R2Y = self.R2Y + 10
         else :
             MonCanevas.move(Raquette2, 0, -10)
 
     def bas2 (event):
-        global R2Y, Hauteur
+        self.R2Y, self.Hauteur
         """mouvement vers le bas de la raquette 2"""
-        R2Y = R2Y + 10
-        if (R2Y+RHauteur/2) > Hauteur :
-            R2Y = R2Y - 10
+        self.R2Y = self.R2Y + 10
+        if (self.R2Y+self.RHauteur/2) > self.Hauteur :
+            self.R2Y = self.R2Y - 10
         else :
             MonCanevas.move(Raquette2, 0, 10)
 
@@ -143,29 +143,29 @@ class DanDu:
         # création d'un widget 'Canvas'
         Mafenetre = Tk()
         MonCanevas = Canvas(Mafenetre,
-        width = Largeur, height = Hauteur)
+        width = self.Largeur, height = self.Hauteur)
         MonCanevas.pack(side = TOP, padx = 10, pady = 10)
         item = MonCanevas.create_image(0, 0,
         anchor=NW, image=photo)
 
     def balle():
         # Création d'un objet graphique balle
-        Balle = MonCanevas.create_oval(X-Rayon, Y-Rayon,
-        X+Rayon, Y+Rayon, width=1, fill='white')
+        Balle = MonCanevas.create_oval(self.X-self.Rayon, self.Y-self.Rayon,
+        self.X+self.Rayon, self.Y+self.Rayon, width=1, fill='white')
         Bouton1 = Button(Mafenetre, text = 'Quitter',
         command = Mafenetre.destroy)
         Bouton1.pack()
 
     def raquette():
         # Création d'un objet graphique raquette
-        R1X = 1010
-        R1Y = Hauteur/2
-        R2X = 10
-        R2Y = Hauteur/2
-        Raquette1 = MonCanevas.create_rectangle(R1X, R1Y-RHauteur/2,
-        R1X+RLargeur, R1Y+RHauteur/2, outline='white', fill='white')
-        Raquette2 = MonCanevas.create_rectangle(R2X, R2Y-RHauteur/2,
-        R2X+RLargeur, R2Y+RHauteur/2, outline='white', fill='white')
+        self.R1X = 1010
+        self.R1Y = self.Hauteur/2
+        self.R2X = 10
+        self.R2Y = self.Hauteur/2
+        Raquette1 = MonCanevas.create_rectangle(self.R1X, self.R1Y-self.RHauteur/2,
+        self.R1X+self.RLargeur, self.R1Y+self.RHauteur/2, outline='white', fill='white')
+        Raquette2 = MonCanevas.create_rectangle(self.R2X, self.R2Y-self.RHauteur/2,
+        self.R2X+self.RLargeur, self.R2Y+self.RHauteur/2, outline='white', fill='white')
 
     def mouvementClavier():
         #Association des movements aux touches du clavier
@@ -179,7 +179,17 @@ class DanDu:
         pygame.mixer.stop()
 
     def createFrame(self, window, callbackExit):
-        callbackExit = callbackExit
-        frame = Frame(window)
-        frame.pack()
-        return frame
+        self.callbackExit = callbackExit
+        self.frame = Frame(window)
+        self.frame.pack()
+        return self.frame
+
+    def menus_PingPong(self, fen):
+        top = Menu(fen)
+        fen.config(menu = top)
+
+        jeu = Menu(top, tearoff = False)
+        top.add_cascade(label = 'Options', menu=jeu)
+        jeu.add_command(label = 'Nouvelle partie', command = )
+
+        jeu.add_command(label = 'Quitter', command=self.callbackExit)
