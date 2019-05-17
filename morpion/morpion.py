@@ -2,6 +2,7 @@
 
 def Clic(event):
     """ Gestion de l'événement Clic gauche sur la zone graphique """
+    global joueur
     # position du pointeur de la souris
     X = event.x
     Y = event.y
@@ -146,7 +147,6 @@ def Clic(event):
         joueur = joueur+1
         if gagne(joueur2):
             fenetre2()
-    global joueur
 
 
 def gagne(l):
@@ -179,7 +179,7 @@ def fenetre1():
 # Positionnement du widget avec la méthode pack()
     Label1.pack()
 # Création d'un widget Button (bouton Quitter)
-    Bouton1 = Button(fenetre1, text = 'Quitter', command = fenetre1.destroy)
+    Bouton1 = Button(fenetre1, text = 'OK', command = fenetre1.destroy)
     Bouton1.pack()
 # Lancement du gestionnaire d'événements
     fenetre1.mainloop()
@@ -193,11 +193,11 @@ joueur2 = []
 Mafenetre = Tk()
 Mafenetre.title('Morpion')
 #image du cercle
-cercle = PhotoImage(file="cercle.png")
+cercle = PhotoImage(file="morpion/cercle.png")
 #image de la croix
-croix = PhotoImage(file="croix.png")
+croix = PhotoImage(file="morpion/croix.png")
 # Image de fond
-photo = PhotoImage(file="quadrillage.png")
+photo = PhotoImage(file="morpion/quadrillage.png")
 # Création d'un widget Canvas (zone graphique)
 Largeur = 550
 Hauteur = 550
