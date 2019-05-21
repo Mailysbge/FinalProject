@@ -1,16 +1,17 @@
 import tkinter
 import pygame
 from tkinter import *
-from views.Menu import Menu
-from views.MemoryBase import MemoryBase
+from interfaceAccueil.Menu import Menu
+from memory.MemoryBase import MemoryBase
 from morpion.Morpion import Morpion
 from pingPong.PingPong import PingPong
 
-
 def removeAllFrames():
-    global CurrentFrame
-    if (CurrentFrame is not None):
-        CurrentFrame.destroy()
+    """Fonction qui permet de supprimer touts les cadres du menu pour lancé
+    juste le jeu """
+    global FRAME
+    if (FRAME is not None):
+        FRAME.destroy()
         emptyMenu = tkinter.Menu(master)
         master.config(menu=emptyMenu)
         if (pygame.mixer.get_init() is not None):
@@ -18,35 +19,45 @@ def removeAllFrames():
 
 
 def showMemory():
-    global CurrentFrame
+    """Fonction qui permet d'aficher le memory"""
+    global FRAME
     removeAllFrames()
     master.title("Memory")
-    CurrentFrame = MemoryBase().createFrame(master, showMenu)
+    FRAME = MemoryBase().createFrame(master, showMenu)
 
 
 def showPingPong():
-    global CurrentFrame
+    """Fonction qui permet d'aficher le PingPong"""
+    global FRAME
     removeAllFrames()
     master.title("Ping-Pong")
-    CurrentFrame = PingPong().createFrame(master, showMenu)
+    FRAME = PingPong().createFrame(master, showMenu)
 
 
 def showMorpion():
-    global CurrentFrame
+    """Fonction qui permet d'aficher le Morpion"""
+    global FRAME
     removeAllFrames()
     master.title("Morpion")
-    CurrentFrame = Morpion().createFrame(master, showMenu)
+    FRAME = Morpion().createFrame(master, showMenu)
 
 
 def showMenu():
-    global CurrentFrame
+    """Fonction qui permet d'aficher l'interface d'acceuil"""
+    global FRAME
     removeAllFrames()
     master.title('Arena games')
-    CurrentFrame = Menu().createFrame(master, showMemory, showPingPong, showMorpion)
+    FRAME = Menu().createFrame(master, showMemory, showPingPong,
+     showMorpion)
 
+def onClosing():
+    if (pygame.mixer.get_init() is not None):
+        pygame.mixer.stop()
+    master.destroy()
 
 # Programme principal
 master = tkinter.Tk()
-CurrentFrame = None
+master.protocol("WM_DELETE_WINDOW", onClosing)
+FRAME = None
 showMenu()
 tkinter.mainloop()
